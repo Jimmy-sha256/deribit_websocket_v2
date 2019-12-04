@@ -45,6 +45,7 @@ class WS_Client(object):
         async with websockets.connect(self.client_url) as websocket:
             await websocket.send(request)
             response = await websocket.recv()
+            response = json.loads(response)
             return response
 
 
