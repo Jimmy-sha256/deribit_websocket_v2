@@ -48,7 +48,6 @@ class WS_Client(object):
                     break
             return response
 
-
     # send a public method request
     async def public_api(self, request):
         async with websockets.connect(self.client_url) as websocket:
@@ -56,7 +55,6 @@ class WS_Client(object):
             response = await websocket.recv()
             response = json.loads(response)
             return response
-
 
     # send a public subscription request
     async def public_sub(self, request):
@@ -67,21 +65,17 @@ class WS_Client(object):
                 response = json.loads(response)
                 print(response)
 
-
     # create an asyncio event loop
     def loop(self, api, request):
         response = asyncio.get_event_loop().run_until_complete(
             api(json.dumps(request)))
-
         return response
-
 
     def index(self, currency):
         options = {"currency" : currency}
         self.json["method"] = "public/get_index"
         self.json["params"] = options
         return self.loop(self.public_api, self.json)
-
 
     def ticker(self, instrument_name):
         options = {"instrument_name" : instrument_name}
@@ -126,7 +120,6 @@ class WS_Client(object):
         self.json["params"] = options
         return self.loop(self.private_api, self.json)
 
-
     def sell(self, instrument_name, amount, order_type, reduce_only,
             price=None, post_only=None):
         options = {
@@ -165,7 +158,6 @@ class WS_Client(object):
         self.json["params"] = options
         return self.loop(self.private_api, self.json)
 
-
     def edit(self, order_id, amount, price):
         options= {
             "order_id" : order_id,
@@ -177,25 +169,21 @@ class WS_Client(object):
         self.json["params"] = options
         return self.loop(self.private_api, self.json)
 
-
     def cancel(self, order_id):
         options = {"order_id" : order_id}
         self.json["method"] = "private/cancel"
         self.json["params"] = options
         return self.loop(self.private_api, self.json)
 
-
     def cancel_all(self):
         self.json["method"] = "private/cancel_all"
         return self.loop(self.private_api, self.json)
-
 
     def account_summary(self, currency):
         options = {"currency" : currency}
         self.json["method"] = "private/get_account_summary"
         self.json["params"] = options
         return self.loop(self.private_api, self.json)
-
 
     def get_position(self, instrument_name):
        options = {"instrument_name" : instrument_name}
@@ -226,6 +214,5 @@ class WS_Client(object):
        self.json["method"] = "private/subscribe"
        self.json["params"] = options
        return self.loop(self.private_api, self.json)
-
 
 client = WS_Client(client_id, client_secret)
