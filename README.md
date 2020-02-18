@@ -50,7 +50,9 @@ Add either main-net or test-net websocket url to credentials.py file:
 
 #### 3. Index Price
   
-```index(currency)```
+```shell
+index(currency)
+```
  
  | Paramaters          | Type       | Description                                         |
  |---------------------|------------|-----------------------------------------------------|
