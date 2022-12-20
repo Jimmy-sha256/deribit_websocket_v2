@@ -26,7 +26,7 @@ mkdir deribit_ws && cd deribit_ws
 
 git clone https://github.com/Jimmy-sha256/deribit_ws.git
 
-virtualenv --python=/usr/bin/python3.7 venv
+virtualenv --python=/usr/bin/python3.10 venv
 
 source /venv/bin/activate
 
